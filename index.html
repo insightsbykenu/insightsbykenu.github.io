@@ -4,126 +4,474 @@
   <meta charset="UTF-8">
   <title>Mariam Kenu | Analytics Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --ink: #1a1208;
+      --paper: #faf7f2;
+      --surface: #fff;
+      --accent: #c45c26;
+      --accent-light: #f0ddd0;
+      --muted: #8a7f74;
+      --border: #e8e0d5;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f9f9f9;
-      color: #333;
-      line-height: 1.6;
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+      font-weight: 300;
     }
+
+    /* ── HEADER ── */
     header {
-      background-color: #111;
-      color: #fff;
-      padding: 40px 20px;
-      text-align: center;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 70px 40px 60px;
+      position: relative;
+      overflow: hidden;
     }
-    section {
-      max-width: 900px;
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      border: 1px solid rgba(250,247,242,0.08);
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(250,247,242,0.06);
+    }
+
+    .header-inner {
+      max-width: 860px;
       margin: auto;
-      padding: 40px 20px;
-      background: #fff;
-      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: var(--paper);
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.1s;
+    }
+
+    header h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .header-tagline {
+      margin-top: 16px;
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(250,247,242,0.6);
+      letter-spacing: 0.03em;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.35s;
+    }
+
+    .header-links {
+      margin-top: 28px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.5s;
+    }
+
+    .header-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(250,247,242,0.75);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid rgba(250,247,242,0.2);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .header-links a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    /* ── ABOUT ── */
+    .about-block {
+      padding: 56px 0 48px;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.55s;
+    }
+
+    .about-block p {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--ink);
+      max-width: 680px;
+    }
+
+    .about-block p strong {
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SKILLS ── */
+    .skills-section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .skill-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink);
+      transition: border-color 0.2s, background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skill-pill:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .skill-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 6px;
+      padding: 28px 30px;
+      margin-bottom: 16px;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
+      overflow: hidden;
     }
-    h2 {
-      border-bottom: 2px solid #eee;
-      padding-bottom: 10px;
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.3s ease;
     }
-    ul {
-      padding-left: 20px;
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(26,18,8,0.08);
+      border-color: rgba(196,92,38,0.3);
     }
-    .project {
-      margin-bottom: 25px;
+
+    .project-card:hover::before {
+      transform: scaleY(1);
     }
+
+    .project-num {
+      font-family: var(--serif);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .project-card h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      font-size: 14px;
+      font-weight: 300;
+      color: #5a5248;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .tool-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--muted);
+    }
+
+    .project-link {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .project-link::after { content: '→'; }
+    .project-link:hover { gap: 10px; }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: 48px 0 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px 22px;
+      transition: border-color 0.2s;
+    }
+    .contact-card:hover { border-color: var(--accent); }
+
+    .contact-card .c-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .contact-card a, .contact-card span {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .contact-card a:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
     footer {
       text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      color: #777;
+      padding: 32px 20px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
     }
-    a {
-      color: #0066cc;
-      text-decoration: none;
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    a:hover {
-      text-decoration: underline;
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
-
 <body>
 
 <header>
-  <h1>Mariam Kenu</h1>
-  <p>Data Analytics Student | Business Intelligence | Machine Learning</p>
+  <div class="header-inner">
+    <h1><em>Mariam</em> <em>Kenu</em></h1>
+    <p class="header-tagline">MSc Business Analytics &nbsp;·&nbsp; Data Intelligence &nbsp;·&nbsp; Machine Learning</p>
+    <div class="header-links">
+      <a href="mailto:mariam.kenu03@gmail.com">mariam.kenu03@gmail.com</a>
+      <a href="https://github.com/insightsbykenu" target="_blank">github.com/insightsbykenu</a>
+      <a href="https://www.linkedin.com/in/mariamkenu" target="_blank">linkedin.com/in/mariamkenu</a>
+    </div>
+  </div>
 </header>
 
-<section>
-  <h2>About Me</h2>
-  <p>
-    I am a masters stuent in business analytics student with a strong interest in business intelligence,
-    data-driven decision-making, and applied machine learning. My academic projects
-    focus on transforming raw data into meaningful insights using analytical and
-    visualization tools.
-  </p>
-</section>
+<main>
 
-<section>
-  <h2>Skills</h2>
-  <ul>
-    <li>Python (Pandas, NumPy, Matplotlib)</li>
-    <li>R Programming</li>
-    <li>SQL</li>
-    <li>Tableau / Data Visualization</li>
-    <li>Business Intelligence & Analytics</li>
-    <li>Machine Learning (Academic Projects)</li>
-  </ul>
-</section>
-
-<section>
-  <h2>Projects</h2>
-
-  <div class="project">
-    <h3>Healthcare Machine Learning Analysis</h3>
+  <div class="about-block">
     <p>
-      Applied machine learning techniques to healthcare data to explore patterns,
-      make predictions, and evaluate model performance.
-    </p>
-    <p><strong>Tools:</strong> Python, Scikit-learn, Pandas</p>
-    <p>
-      <a href="#">View Project</a>
+      I'm a <strong>Master's student in Business Analytics</strong> with a strong interest in business intelligence,
+      data-driven decision-making, and applied machine learning. My academic projects focus on transforming
+      raw data into meaningful insights — using analytical and visualization tools to tell the story behind the numbers.
     </p>
   </div>
 
-  <div class="project">
-    <h3>Business Intelligence Dashboard</h3>
-    <p>
-      Designed an interactive dashboard to support business decision-making using
-      real-world datasets.
-    </p>
-    <p><strong>Tools:</strong> Tableau, SQL</p>
-    <p>
-      <a href="#">View Dashboard</a>
-    </p>
-  </div>
+  <section class="skills-section reveal">
+    <p class="section-label">Skills</p>
+    <div class="skills-grid">
+      <div class="skill-pill"><span class="skill-dot"></span>Python (Pandas, NumPy)</div>
+      <div class="skill-pill"><span class="skill-dot"></span>Matplotlib / Seaborn</div>
+      <div class="skill-pill"><span class="skill-dot"></span>R Programming</div>
+      <div class="skill-pill"><span class="skill-dot"></span>SQL</div>
+      <div class="skill-pill"><span class="skill-dot"></span>Tableau</div>
+      <div class="skill-pill"><span class="skill-dot"></span>Business Intelligence</div>
+      <div class="skill-pill"><span class="skill-dot"></span>Machine Learning</div>
+      <div class="skill-pill"><span class="skill-dot"></span>Data Visualization</div>
+    </div>
+  </section>
 
-</section>
+  <section class="projects-section reveal">
+    <p class="section-label">Projects</p>
 
-<section>
-  <h2>Contact</h2>
-  <p>Email:mariam.kenu03@gmail.com</p>
-  <p>
-    GitHub: <a href="https://github.com/insightsbykenu">github.com/insightsbykenu</a><br>
-    LinkedIn: <a href="https://www.linkedin.com/in/mariamkenu" target="_blank">
-    linkedin.com/in/mariamkenu
-  </a>
-  </p>
-</section>
+    <div class="project-card">
+      <p class="project-num">01</p>
+      <h3>Healthcare Machine Learning Analysis</h3>
+      <p>Applied machine learning techniques to healthcare data to explore patterns, make predictions, and evaluate model performance across multiple classification algorithms.</p>
+      <div class="tools-row">
+        <span class="tool-tag">Python</span>
+        <span class="tool-tag">Scikit-learn</span>
+        <span class="tool-tag">Pandas</span>
+      </div>
+      <a href="#" class="project-link">View project</a>
+    </div>
 
-<footer>
-  © 2026 Mariam Kenu
-</footer>
+    <div class="project-card">
+      <p class="project-num">02</p>
+      <h3>Business Intelligence Dashboard</h3>
+      <p>Designed an interactive dashboard to support data-driven business decision-making, enabling stakeholders to explore KPIs and trends across real-world datasets.</p>
+      <div class="tools-row">
+        <span class="tool-tag">Tableau</span>
+        <span class="tool-tag">SQL</span>
+      </div>
+      <a href="#" class="project-link">View dashboard</a>
+    </div>
+
+    <div class="project-card">
+      <p class="project-num">03</p>
+      <h3>B2B SaaS Sales Pipeline Analysis <span style="font-size:11px;font-family:var(--sans);font-weight:500;letter-spacing:0.06em;color:var(--accent);margin-left:8px;vertical-align:middle;">Coming soon</span></h3>
+      <p>End-to-end analysis of tech sales pipeline data — funnel conversion, win-rate modeling, and revenue forecasting. Presented at the National Sales Network conference.</p>
+      <div class="tools-row">
+        <span class="tool-tag">Python</span>
+        <span class="tool-tag">XGBoost</span>
+        <span class="tool-tag">Streamlit</span>
+        <span class="tool-tag">Tableau</span>
+      </div>
+      <a href="#" class="project-link">View project</a>
+    </div>
+
+  </section>
+
+  <section class="contact-section reveal">
+    <p class="section-label">Contact</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <p class="c-label">Email</p>
+        <a href="mailto:mariam.kenu03@gmail.com">mariam.kenu03@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <p class="c-label">GitHub</p>
+        <a href="https://github.com/insightsbykenu" target="_blank">github.com/insightsbykenu</a>
+      </div>
+      <div class="contact-card">
+        <p class="c-label">LinkedIn</p>
+        <a href="https://www.linkedin.com/in/mariamkenu" target="_blank">linkedin.com/in/mariamkenu</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 Mariam Kenu &nbsp;·&nbsp; MSc Business Analytics</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
